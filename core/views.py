@@ -9,6 +9,8 @@ from django.template import loader
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+# from drf_yasg.utils import swagger_auto_schema
+# from drf_yasg import openapi
 
 @api_view(['POST'])
 def login(request):
@@ -18,6 +20,7 @@ def login(request):
     token, created = Token.objects.get_or_create(user=user)
     serializer =Userserializer(instance=user)
     return Response({"token":token.key, "user": serializer.data})
+
 @api_view(['POST'])
 def signup(request):
     serializer = Userserializer(data=request.data)
